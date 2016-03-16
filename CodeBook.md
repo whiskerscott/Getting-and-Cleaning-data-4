@@ -33,4 +33,4 @@ The set of variables that were estimated from these signals are:
 mean(): Mean value
 std(): Standard deviation
 
-The original file contained many observations for each subject and activty type. This file UCI HAR_means.csv displays the mean of these values by subject and activity. 
+The original file contained many observations for each subject and activty type. This files UCI HAR_means.csv and UCI HAR_means.txt displays the mean of these values by subject and activity. 
