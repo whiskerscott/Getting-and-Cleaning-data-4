@@ -1,18 +1,29 @@
 ##Script to download and tidy the giro data
+##The resulting data file shows the mean by subject and activity and will be saved in the UCI_HAR_means.csv file
 
 library(dplyr)
 library(tidyr)
 
 run_analysis<- function(){
+
+	## downloading the initial file 
 	download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip","gyro.zip")
 	unzip("gyro.zip")
+	
+	## reading in the test and training data
 	data1<- tbl_df(read.table("UCI HAR Dataset\\test\\X_test.txt"))
 	data2<- tbl_df(read.table("UCI HAR Dataset\\train\\X_train.txt"))
 	data<-bind_rows(data1,data2)
+	
+	##adding column names
 	names<-read.table("UCI HAR Dataset\\features.txt")
 	colnames(data)<-names$V2
+	
+	## removing duplicate column names
 	valid_column_names <- make.names(names=names(data), unique=TRUE, allow_ = TRUE)
 	names(data)<-valid_column_names
+	
+	##selecting only means and standard deviations
 	data<-select(data, matches("mean|std"))
 
 	## pulling in subjects
